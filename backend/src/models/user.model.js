@@ -17,8 +17,8 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
     },
     serviceProvider: {
-      true: Boolean,
-      required: false,
+      type: Boolean,
+      default: false
     },
   },
   { timestamps: true }
