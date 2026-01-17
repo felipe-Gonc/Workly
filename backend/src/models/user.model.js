@@ -18,10 +18,43 @@ const userSchema = new mongoose.Schema(
     },
     serviceProvider: {
       type: Boolean,
-      default: false
+      default: false,
+    },
+    ratings: [
+      {
+        serviceId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Service",
+          required: true,
+        },
+        stars: {
+          type: Number,
+          min: 1,
+          max: 5,
+          required: true,
+        },
+        comment: {
+          type: String,
+          maxlength: 500,
+        },
+        ratedBy: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
+        ratedAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    averageRating: {
+      type: Number,
+      default: 0,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const User = mongoose.model("User", userSchema);
